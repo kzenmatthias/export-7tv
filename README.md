@@ -12,11 +12,19 @@ npm run dev
 ## Build & deploy
 
 ```sh
-npm run build       # outputs dist/
+npm run build       # outputs dist/ with relative paths (works from any subpath)
 npm run preview     # smoke-test the production build locally
 ```
 
-Upload the contents of `dist/` to any static host. `vite.config.js` uses `base: './'` so the build works under any subpath.
+Upload the contents of `dist/` to any static host.
+
+### Deploy to ohhert.be
+
+```sh
+npm run build:ohhert
+```
+
+Builds with `base=/tools/export-7tv/` straight into `../ohhert/public/tools/export-7tv/`. Commit + push that repo and trigger the production workflow on GitHub to ship.
 
 ## API used
 

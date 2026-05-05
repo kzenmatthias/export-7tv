@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OhHert · 7TV Emote Exporter</title>
+    <meta name="description" content="Export emote names and CDN links from any 7TV channel. Built by ohhert.be." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
+    <script>
+      // Apply theme + lang before paint to avoid flash
+      (function () {
+        try {
+          var stored = localStorage.getItem('ohhert.theme');
+          var theme = stored === 'light' || stored === 'dark'
+            ? stored
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) { /* ignore */ }
+        try {
+          var loc = localStorage.getItem('ohhert.locale');
+          if (loc !== 'nl' && loc !== 'en') {
+            var langs = (navigator.languages || [navigator.language || 'en']);
+            for (var i = 0; i < langs.length; i++) {
+              var base = (langs[i] || '').toLowerCase().split('-')[0];
+              if (base === 'nl' || base === 'en') { loc = base; break; }
+            }
+          }
+          document.documentElement.lang = loc || 'en';
+        } catch (e) { /* ignore */ }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
